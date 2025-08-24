@@ -1,0 +1,246 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>تحلیل امنیتی: اعتماد دیجیتال</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Vazirmatn:wght@300;400;500;700&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0d1117;
+            --surface-color: #161b22;
+            --border-color: rgba(255, 255, 255, 0.1);
+            --text-primary: #c9d1d9;
+            --text-secondary: #8b949e;
+            --accent-color: #58a6ff;
+            --code-bg: #010409;
+        }
+
+        *, *::before, *::after {
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Vazirmatn', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: var(--bg-color);
+            background-image: radial-gradient(circle at 1px 1px, rgba(255,255,255,0.05) 1px, transparent 0);
+            background-size: 25px 25px;
+            color: var(--text-primary);
+            line-height: 1.8;
+            margin: 0;
+            padding: 3rem 1rem;
+            display: flex;
+            justify-content: center;
+            font-weight: 400;
+            overflow-x: hidden;
+        }
+
+        .container {
+            max-width: 850px;
+            width: 100%;
+        }
+
+        h1, h2, h3 {
+            font-weight: 700;
+            color: var(--text-primary);
+            text-align: center;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        h1 {
+            font-size: 2.8rem;
+            margin-bottom: 2rem;
+            letter-spacing: -1px;
+        }
+
+        h2 {
+            font-size: 2rem;
+            padding-bottom: 0.75rem;
+            position: relative;
+        }
+
+        p, ul {
+            font-size: 1.05rem;
+            color: var(--text-secondary);
+            margin-bottom: 1.25rem;
+            text-align: justify;
+        }
+        
+        strong {
+            color: var(--text-primary);
+            font-weight: 500;
+        }
+
+        a {
+            color: var(--accent-color);
+            text-decoration: none;
+            position: relative;
+            padding-bottom: 2px;
+        }
+
+        a::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 1px;
+            bottom: 0;
+            right: 0;
+            background-color: var(--accent-color);
+            transition: width 0.3s ease-out;
+        }
+
+        a:hover::after {
+            width: 100%;
+            left: 0;
+            right: auto;
+        }
+
+        pre {
+            background-color: var(--code-bg);
+            border: 1px solid var(--border-color);
+            border-radius: 8px;
+            padding: 1.5rem;
+            overflow-x: auto;
+            font-family: "SF Mono", "Fira Code", "Consolas", monospace;
+            font-size: 0.9rem;
+            direction: ltr;
+            text-align: left;
+            line-height: 1.6;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+        }
+
+        code { font-family: inherit; }
+        pre code .token.keyword { color: #ff7b72; }
+        pre code .token.string { color: #a5d6ff; }
+        pre code .token.comment { color: #8b949e; }
+        pre code .token.punctuation { color: #c9d1d9; }
+        pre code .token.function { color: #d2a8ff; }
+
+        .iframe-container {
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            overflow: hidden;
+            margin-top: 2rem;
+            height: 550px;
+            resize: vertical;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.4), 0 0 0 1px var(--border-color);
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+        .iframe-container:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 15px 40px rgba(0,0,0,0.5), 0 0 0 1px var(--accent-color);
+        }
+
+        iframe {
+            width: 100%;
+            height: 100%;
+            border: none;
+        }
+        
+        blockquote {
+            border-right: 4px solid var(--accent-color);
+            padding: 1rem 2rem;
+            margin: 2.5rem 0;
+            font-size: 1.1rem;
+            color: var(--text-primary);
+            background-color: rgba(88, 166, 255, 0.05);
+            border-top-right-radius: 8px;
+            border-bottom-right-radius: 8px;
+        }
+
+        /* Scroll Animation */
+        .scroll-animate {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease-out, transform 0.6s ease-out;
+        }
+
+        .scroll-animate.is-visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <h1 class="scroll-animate">  کلید API شما اعتمادی که می‌تواند گران تمام شود</h1>
+        
+        <p class="scroll-animate">
+            در دنیای مدرن، <strong>API Key</strong> حکم کلید دیجیتال آپارتمان ما را دارد. ما این کلیدها را به اپلیکیشن‌های مختلف می‌دهیم تا به نمایندگی از ما، به سرویس‌های قدرتمندی مانند <strong>Google Gemini</strong> دسترسی پیدا کرده و کارهای شگفت‌انگیزی برایمان انجام دهند. اما همان‌طور که کلید فیزیکی خود را به هر غریبه‌ای نمی‌سپاریم، در دنیای دیجیتال نیز باید در سپردن این کلیدهای قدرتمند، هوشمندانه عمل کنیم.
+        </p>
+        
+        <h2 class="scroll-animate">مطالعه موردی: یک ابزار ترجمه زیرنویس</h2>
+        
+        <p class="scroll-animate">
+            اخیراً ابزاری متن-باز و کاربردی برای ترجمه زیرنویس توجه ما را به خود جلب کرد. این برنامه با دریافت کلید Gemini API، به راحتی فایل‌های زیرنویس را برای کاربر پردازش می‌کند. در نگاه اول و در حالت پیش‌فرض، همه چیز عالی به نظر می‌رسد و ارتباطی مستقیم و امن با سرورهای گوگل برقرار می‌شود. در زیر می‌توانید خود اپلیکیشن را مشاهده و بررسی کنید:
+        </p>
+
+        <div class="iframe-container scroll-animate">
+            <iframe src="https://itsyebekhe.github.io/subtitle-translate/" title="Subtitle Translator Application"></iframe>
+        </div>
+
+        <h2 class="scroll-animate">یک "ویژگی" جالب: گزینه <code>Use Proxy</code></h2>
+
+        <p class="scroll-animate">
+            داستان از جایی جذاب می‌شود که با یک تیک کوچک در رابط کاربری برنامه مواجه می‌شویم: <strong>"Use Proxy"</strong>. این گزینه، که شاید برای عبور از محدودیت‌های شبکه طراحی شده باشد، مسیر حرکت داده‌های ما را به شکل قابل تأملی تغییر می‌دهد. با فعال‌سازی این گزینه، کد برنامه مسیر جدیدی را انتخاب می‌کند.
+        </p>
+        
+        <pre class="scroll-animate"><code class="language-javascript"><span class="token comment">// آدرس پروکسی تعریف شده در سورس کد برنامه</span>
+<span class="token keyword">const</span> proxyUrl <span class="token punctuation">=</span> <span class="token string">'https://middleman.itsyebekhe.workers.dev'</span><span class="token punctuation">;</span>
+
+<span class="token comment">// انتخاب بین ارسال مستقیم یا از طریق پروکسی</span>
+<span class="token keyword">const</span> url <span class="token punctuation">=</span> useProxyCheckbox<span class="token punctuation">.</span>checked <span class="token punctuation">?</span> proxyUrl <span class="token punctuation">:</span> <span class="token string">'https://generativelanguage.googleapis.com/...'</span><span class="token punctuation">;</span>
+</code></pre>
+
+        <p class="scroll-animate">
+            این معماری، یک انتخاب طراحی جسورانه است. در واقع، برنامه به جای اینکه به شما اجازه دهد از پروکسی دلخواه خودتان استفاده کنید، یک پروکسی پیش‌فرض را پیشنهاد می‌دهد. این کار، بار انتخاب یک پروکسی امن را از دوش کاربر برمی‌دارد که در نوع خود، لطف بزرگی است.
+        </p>
+
+        <blockquote class="scroll-animate">
+            "فراموش نکنید که پس از استفاده، کلید API خود را پاک کنید، مخصوصاً روی کامپیوترهای اشتراکی."
+        </blockquote>
+        <p class="scroll-animate">
+            این توصیه امنیتی که در مستندات پروژه آمده، واقعاً قابل تحسین است. اما یک سوال ظریف به ذهن می‌آورد: وقتی یک کاربر تیک پروکسی را فعال می‌کند و کلید Gemini خود را آگاهانه به سرور شخص ثالثی ارسال می‌کند، آیا این کار ریسکی به مراتب بزرگتر از کار کردن با یک کامپیوتر اشتراکی نیست؟
+        </p>
+        
+        <h2 class="scroll-animate">جمع‌بندی: اعتماد چقدر برایتان هزینه دارد؟</h2>
+        <p class="scroll-animate">
+            کلید Gemini API، مستقیماً به حساب گوگل شما متصل است.(قابل استناد برای مقام قضایی) سپردن آن به یک واسطه، مانند دادن یک حق امضا یا وکالت تولید محتوا و استفاده ابزاری در ساختار هر وب اپلیکشن مستعد اجرای فعل جرم به فردی است که تنها شناخت شما از او، چند پروژه متن-باز در گیت‌هاب است. شاید این معماری، تنها یک راه حل ساده و از روی خوش‌قلبی برای کمک به کاربران بوده باشد. اما در دنیای امنیت، ما با نیت‌ها کاری نداریم؛ با <strong>نتایج</strong> کار داریم. و نتیجه این معماری، قرار دادن کاربر در موقعیتی است که باید <strong>اعتمادی تمام و کمال</strong> به توسعه‌دهنده داشته باشد.
+        </p>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', () => {
+            const animatedElements = document.querySelectorAll('.scroll-animate');
+
+            if ("IntersectionObserver" in window) {
+                const observer = new IntersectionObserver((entries, observer) => {
+                    entries.forEach(entry => {
+                        if (entry.isIntersecting) {
+                            entry.target.classList.add('is-visible');
+                            observer.unobserve(entry.target);
+                        }
+                    });
+                }, {
+                    threshold: 0.1
+                });
+
+                animatedElements.forEach(el => {
+                    observer.observe(el);
+                });
+            } else {
+                // Fallback for older browsers
+                animatedElements.forEach(el => {
+                    el.classList.add('is-visible');
+                });
+            }
+        });
+    </script>
+
+</body>
+</html>
